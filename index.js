@@ -44,10 +44,24 @@ async function run() {
       res.send(result)
     })
 
+    app.get("/spot/:email",async(req,res)=>{
+      const email = req.params.email;
+      const result = await spotCollection.find({email:email}).toArray()
+      res.send(result)
+
+    })
+
     app.post("/allSpot",async(req,res)=>{
       const spot = req.body;
       console.log(spot)
       const result = await spotCollection.insertOne(spot)
+      res.send(result)
+    })
+
+    app.delete("/spot/:id",async(req,res)=>{
+      const id = req.params.id
+      const query =  {_id: new ObjectId(id)}
+      const result = await spotCollection.deleteOne(query)
       res.send(result)
     })
     // Send a ping to confirm a successful connection
