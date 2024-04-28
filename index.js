@@ -52,6 +52,13 @@ async function run() {
 
     })
 
+    app.get("/countries/:country",async(req,res)=>{
+      const country = req.params.country;
+      const result = await spotCollection.find({country:country}).toArray()
+      res.send(result)
+
+    })
+
     app.post("/allSpot",async(req,res)=>{
       const spot = req.body;
       console.log(spot)
